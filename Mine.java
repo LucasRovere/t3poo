@@ -41,7 +41,7 @@ public class Mine extends charTask {
     @Override
     void modifyAspects(int c) {
         active.setEnergy(active.getEnergy() - 10);
-        active.earnCharacterGold(5 + active.getXP() / 500);
+        active.earnCharacterGold(10 + active.getXP() / 500);
         active.addXP(1);
     }
 

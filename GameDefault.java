@@ -34,6 +34,7 @@ public class GameDefault {
         updateMessage("Started");
         auxItemVector = new ArrayList<>();
         generateLists();
+        AssembleStore();
     }
 
     private static void updateMessage(String message) {
@@ -191,6 +192,9 @@ public class GameDefault {
     //a qual item o botão clicado corresponde.
     //vender
     public static void sellItem(int itemN) {
+        if(auxItemVector.size() < itemN) return;
+        if(currentChar == null) return;
+
         currentChar.sellItem(auxItemVector.get(itemN).getName());
 
         updateMessage("Item: " + auxItemVector.get(itemN).getName() + " vendido");
@@ -199,6 +203,9 @@ public class GameDefault {
     //comprar
 
     public static void buyItem(int itemN) {
+        if(auxItemVector.size() < itemN) return;
+        if(currentChar == null) return;
+
         currentChar.buyItem(auxItemVector.get(itemN));
         Store.remove(auxItemVector.get(itemN).getName());
         
@@ -207,7 +214,7 @@ public class GameDefault {
         updateMessage("Item: " + auxItemVector.get(itemN).getName() + " comprado");
     }
 
-    //combinar
+    /*combinar
 
     public static void combItem(int itemN) {
         Item originalA, originalB, combo;
@@ -220,7 +227,7 @@ public class GameDefault {
         currentChar.buyItem(combo);
 
         updateMessage("Items: " + originalA.getName() + " e " + originalB.getName() + " combinados");
-    }
+    }*/
 
 //================================================================\\
     //Tarefas
