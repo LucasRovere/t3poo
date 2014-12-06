@@ -1,0 +1,308 @@
+/*
+ A classe character é uma classe abstrata que contem a maior parte dos
+ metodos necessários para um personagem do jogo.
+ No entanto, foi decidido que personagens não poderiam ser genericos.
+ Por isso não é possível instanciar um objeto character, sendo necessário escolher
+ entre uma de suas especializações (classes filhas).
+ */
+package game;
+//package character;
+
+import static java.lang.Math.*;
+import java.util.Iterator;
+
+public abstract class Character implements Creature {
+
+    private String alias;
+    private int HP;
+    private int MP;
+    private int maxPoints;
+    private int energy;
+    private Pet pet;
+    private boolean taskFree;
+    private int ID;
+
+    protected Inventory myItems;
+    protected int XP;
+    protected int strenght;
+    protected int speed;
+    protected int dexterity;
+    protected int constitution;
+    protected int realspeed;
+
+    public Character(String alias) {
+        this.alias = alias;
+        HP = 100;
+        XP = 1;
+        MP = 0;
+        strenght = 10;
+        speed = 10;
+        dexterity = 10;
+        constitution = 10;
+        realspeed = speed;
+        maxPoints = 100;
+        pet = null;
+        energy = 100;
+        taskFree = true;
+        ID = -1;
+        myItems = new Inventory();
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void addSpeed(int qtd) {
+        speed += qtd;
+        normalizeAspects();
+    }
+
+    public void addStrenght(int qtd) {
+        strenght += qtd;
+        normalizeAspects();
+    }
+
+    public void addDexterity(int qtd) {
+        dexterity += qtd;
+        normalizeAspects();
+    }
+
+    public void addConstitution(int qtd) {
+        constitution += qtd;
+        normalizeAspects();
+    }
+
+    public void addMaxPoints(int qtd) {
+        maxPoints += qtd;
+    }
+
+    public void setEnergy(int v) {
+        energy = v;
+    }
+
+    public void changePet(Pet newPet) {
+        pet = newPet;
+    }
+
+    public Iterator getInventoryIterator() {
+        return myItems.getIterator();
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public int getXP() {
+        return XP;
+    }
+
+    @Override
+    public String getName() {
+        return alias;
+    }
+
+    @Override
+    public int getHP() {
+        return HP;
+    }
+
+    public int getItemsNumber() {
+        return myItems.getUsedspaces();
+    }
+
+    public Item getItem(int pos) {
+        return myItems.searchItem(pos);
+    }
+
+    @Override
+    public int getAttackpoints() {
+        int i, points = 0;
+        Weapon current;
+        Armor current2;
+
+        normalizeAspects();
+
+        if ((current2 = myItems.getEquipedArmor()) != null) {
+            realspeed = (int) (speed * sqrt(current2.getWeight()) / 10);
+        }
+
+        points += strenght * 5;
+        points += dexterity * 3;
+        points += realspeed * 2;
+
+        points = points / 10;
+
+        if ((current = myItems.getEquipedWeapon1()) != null) {
+            points += current.getActionPts();
+        }
+        if ((current = myItems.getEquipedWeapon2()) != null) {
+            points += current.getActionPts();
+        }
+
+        points = (points * XP) / 2;
+
+        return points;
+    }
+
+    @Override
+    public int getDefensepoints() {
+        int i, points = 0;
+        Armor current;
+
+        normalizeAspects();
+
+        if ((current = myItems.getEquipedArmor()) != null) {
+            realspeed = (int) (speed * sqrt(current.getWeight()) / 10);
+        }
+
+        points += constitution * 5;
+        points += dexterity * 3;
+        points += realspeed * 2;
+
+        points = points / 10;
+
+        if ((current = myItems.getEquipedArmor()) != null) {
+            points += current.getActionPts();
+        }
+
+        points = (points * XP) / 3;
+
+        return points;
+    }
+
+    public int getBattlePoints() {
+        int points;
+        points = 0;
+
+        points += constitution * 5;
+        points += dexterity * 6;
+        points += speed * 4;
+        points += strenght * 5;
+
+        return points * XP / 60;
+    }
+
+    public Pet getPet() {
+        return pet;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.alias = name;
+    }
+
+    @Override
+    public abstract void attackCharacter(Character opponent);
+
+    public abstract void attackMonster(Monster target);
+
+    public abstract void attackEnemy(Enemy target);
+
+    public abstract void addSpecial(int qtd);
+
+    public abstract int getSpecial();
+
+    public void addXP(int qtd) {
+        XP += qtd;
+    }
+
+    @Override
+    public void addHP(int qtd) {
+        HP += qtd;
+        if (HP < 0) {
+            HP = 0;
+        }
+    }
+
+    public void addMP(int qtd) {
+        MP += qtd;
+    }
+
+    public void buyItem(Item it) {
+        double price;
+
+        price = it.getPrice();
+        if (price > myItems.getTotalGold()) {
+            return;
+        }
+
+        myItems.insertItem(it);
+        myItems.spendGold(price);
+    }
+
+    public Item getInvpos(int pos) {
+        return myItems.searchItem(pos);
+    }
+
+    public void sellItem(String name) {
+        Item rem = myItems.searchItem(name);
+        if (rem == null) {
+            return;
+        }
+
+        myItems.earnGold(rem.getPrice());
+        myItems.removeItem(name);
+    }
+
+    public double getCharacterGold() {
+        return myItems.getTotalGold();
+    }
+
+    public void earnCharacterGold(double qtd) {
+        myItems.earnGold(qtd);
+    }
+
+    public void equipArmor(String name) {
+        myItems.equipArmor(name);
+    }
+
+    public void equipWeapons(String name1, String name2) {
+        myItems.equipWeapons(name1, name2);
+    }
+
+    public void equipWeapon(String name) {
+        myItems.equipWeapons(name, "");
+    }
+
+    private void normalizeAspects() {
+        double fator = 0;
+        double Dstrenght = strenght, Dspeed = speed, Ddexterity = dexterity, Dconstitution = constitution;
+
+        fator += speed;
+        fator += strenght;
+        fator += dexterity;
+        fator += constitution;
+
+        if (fator <= maxPoints) {
+            return;
+        }
+
+        fator = maxPoints / fator;
+
+        Dspeed *= fator;
+        Dstrenght *= fator;
+        Ddexterity *= fator;
+        Dconstitution *= fator;
+
+        speed = (int) (Dspeed + 0.5);
+        strenght = (int) (Dstrenght + 0.5);
+        dexterity = (int) (Ddexterity + 0.5);
+        constitution = (int) (Dconstitution + 0.5);
+    }
+
+    void assignTask() {
+        taskFree = false;
+    }
+
+    void stopTask() {
+        taskFree = true;
+    }
+
+    boolean isFree() {
+        return taskFree;
+    }
+}
