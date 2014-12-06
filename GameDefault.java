@@ -28,7 +28,7 @@ public class GameDefault {
 //================================================================\\
     //Bases
     public static void setGameDefault() {
-        GameDefault.playerTeam = new Team("My Team", blue, 4);
+        GameDefault.playerTeam = new Team<Character>("My Team", blue, 4);
         GameDefault.currentChar = null;
         AssembleStore();
         updateMessage("Started");
@@ -53,7 +53,7 @@ public class GameDefault {
 
     //Botões player
     //buttonN vai de 0 a 3, representando os 4 chars disponíveis
-    public static void selectcChar(int buttonN) {
+    public static void selectChar(int buttonN) {
         playerTeam.clearDead();
         if (playerTeam.teamSize() <= buttonN) {
             updateMessage("Esse personagem não foi adicionado");

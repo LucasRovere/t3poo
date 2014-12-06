@@ -5,8 +5,8 @@ package game;
 
 public enum PetType {
 
-    Wolf,
-    Tiger,
-    Lion,
-    Eagle
+    wolf,
+    tiger,
+    lion,
+    eagle
 }

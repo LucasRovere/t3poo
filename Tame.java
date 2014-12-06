@@ -37,7 +37,7 @@ public class Tame extends charTask {
             return -1;
         }
 
-        if (Math.random() < 1 / (10 + active.getXP()) {
+        if (Math.random() < 1 / (10 + active.getXP())) {
             return 0;
         }
         if (++roundCount > period) {

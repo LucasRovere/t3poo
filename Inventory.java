@@ -2,9 +2,6 @@
 Um inventário é uma estrutura que guarda itens para um personagem.
 */
 package game;
-//package item;
-//package character;
-//package tasks;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,10 +43,6 @@ public class Inventory {
     public int getAvailableSpace() {
         if(items == null) return spaces;
         return spaces - items.size();
-    }
-    
-    public Iterator getIterator(){
-        return items.iterator();
     }
 
     public void spendGold(double qnt) {

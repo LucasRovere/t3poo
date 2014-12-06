@@ -88,10 +88,6 @@ public abstract class Character implements Creature {
         pet = newPet;
     }
 
-    public Iterator getInventoryIterator() {
-        return myItems.getIterator();
-    }
-
     public int getEnergy() {
         return energy;
     }

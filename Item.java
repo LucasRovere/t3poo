@@ -1,7 +1,6 @@
 package game;
-//package item;
-//package character;
-//package tasks;
+
+import static game.ItemType.*;
 
 public interface Item {
     

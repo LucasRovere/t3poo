@@ -64,7 +64,7 @@ class Team <T extends Creature> {
         return (name + cor);
     }
 
-    public void resolveBattle(Team opteam) {
+    public void resolveBattle(Team<Creature> opteam) {
         if (getPoints() > opteam.getPoints()) {
             win++;
         } else if (getPoints() < opteam.getPoints()) {

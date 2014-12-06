@@ -14,22 +14,22 @@ public class Game {
 
     public static void main(String[] args) {
     	
-    	setGameDefault();
+    	GameDefault.setGameDefault();
 
     	//Exemplo de execucao sem intereacao do usuario.
 
     	GameDefault.addWizard();
     	GameDefault.addKnight();
-    	GameDefault.addTheif();
+    	GameDefault.addThief();
 
-    	GameDefault.selectcChar(0);
-    	GameDeafult.goHunt(animal);
+    	GameDefault.selectChar(0);
+    	GameDefault.goHunt(animal);
 
     	GameDefault.selectChar(1);
     	GameDefault.goMine();
 
 		GameDefault.selectChar(2);
-    	GameDefault.goTame();
+    	GameDefault.goTame(wolf);
 
     	GameDefault.selectChar(1);
 
