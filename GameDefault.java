@@ -15,7 +15,7 @@ public class GameDefault {
     public static Team<Character> playerTeam;
 
     private static String message;
-    private static ArrayList<Item> auxItemVector;
+    public static ArrayList<Item> auxItemVector;
     
     //Listas de nomes para o jogo
     private static ArrayList<String> armorNames;
@@ -30,7 +30,6 @@ public class GameDefault {
     public static void setGameDefault() {
         GameDefault.playerTeam = new Team<Character>("My Team", blue, 4);
         GameDefault.currentChar = null;
-        AssembleStore();
         updateMessage("Started");
         auxItemVector = new ArrayList<>();
         generateLists();
@@ -77,7 +76,7 @@ public class GameDefault {
             return;
         }
 
-        Thief newMember = new Thief("name", 0);
+        Thief newMember = new Thief(getPersonName(), 0);
         playerTeam.addMember(newMember);
 
         updateMessage("Adiocionado Ladrao" + newMember.getName());
@@ -91,7 +90,7 @@ public class GameDefault {
             return;
         }
 
-        Wizard newMember = new Wizard("name", 0);
+        Wizard newMember = new Wizard(getPersonName(), 0);
         playerTeam.addMember(newMember);
         updateMessage("Adiocionado Mago " + newMember.getName());
     }
@@ -104,7 +103,7 @@ public class GameDefault {
             return;
         }
 
-        Knight newMember = new Knight("name", 0);
+        Knight newMember = new Knight(getPersonName(), 0);
         playerTeam.addMember(newMember);
 
         updateMessage("Adiocionado Cavaleiro " + newMember.getName());
@@ -153,6 +152,8 @@ public class GameDefault {
         int i;
 
         auxItemVector.clear();
+        
+        if(currentChar == null) return;
 
         if (currentChar.getItemsNumber() == 10) {
             updateMessage("Inventario cheio");
@@ -171,6 +172,8 @@ public class GameDefault {
         int i;
 
         auxItemVector.clear();
+        
+        if(currentChar == null) return;
 
         for (i = 0; i < currentChar.getItemsNumber(); i++) {
             auxItemVector.add(currentChar.getItem(i));
@@ -192,7 +195,7 @@ public class GameDefault {
     //a qual item o botão clicado corresponde.
     //vender
     public static void sellItem(int itemN) {
-        if(auxItemVector.size() < itemN) return;
+        if(auxItemVector.size() <= itemN) return;
         if(currentChar == null) return;
 
         currentChar.sellItem(auxItemVector.get(itemN).getName());
@@ -203,7 +206,7 @@ public class GameDefault {
     //comprar
 
     public static void buyItem(int itemN) {
-        if(auxItemVector.size() < itemN) return;
+        if(auxItemVector.size() <= itemN) return;
         if(currentChar == null) return;
 
         currentChar.buyItem(auxItemVector.get(itemN));
