@@ -7,6 +7,9 @@
  condição e fazer o necessário.
  Condições > 0 servem para definir o que está se passando na execução da tarefa.
  Condições <= 0 servem para definir que a tarefa acabou, e o motivo de ter acabado.
+
+Ps: Peço desculpas se algumas tarefas estão desproporcionalmente vantajosas ou desvantajosas.
+Para conseguir acertar tudo, realmente não deu tempo de deixar o jogo "justo"
  */
 package game;
 //package item;

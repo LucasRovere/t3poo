@@ -33,6 +33,7 @@ public class JFrame_Menus extends javax.swing.JFrame {
     {
         if(GameDefault.currentChar == null) return;
         
+        else{
         // ========================= TEAM ========================= //
         TeamAreaText.setEditable(false);
         TeamAreaText.setText("NAME: ");
@@ -103,10 +104,12 @@ public class JFrame_Menus extends javax.swing.JFrame {
         PlayerStatsTextArea.append("ENERGY: ");
         PlayerStatsTextArea.append(Integer.toString(GameDefault.currentChar.getEnergy()));
         PlayerStatsTextArea.append("\n\n");
-        PlayerStatsTextArea.append("PET: ");
-        PlayerStatsTextArea.append(GameDefault.currentChar.getPet().getRace().name());
-        PlayerStatsTextArea.append(" ");
-        PlayerStatsTextArea.append(GameDefault.currentChar.getPet().getName());
+        if(GameDefault.currentChar.getPet() != null){
+            PlayerStatsTextArea.append("PET: ");
+            PlayerStatsTextArea.append(GameDefault.currentChar.getPet().getRace().name());
+            PlayerStatsTextArea.append(" ");
+            PlayerStatsTextArea.append(GameDefault.currentChar.getPet().getName());
+        }
         
         // ========================= BUY ITEMS ========================= //
         BuyItemsTextArea.setEditable(false);
@@ -127,9 +130,9 @@ public class JFrame_Menus extends javax.swing.JFrame {
         for(int i=0; i<GameDefault.auxItemVector.size(); i++){
             SellItemsTextArea.setText("NAME: ");
             SellItemsTextArea.append(GameDefault.auxItemVector.get(i).getName());
-            SellItemsTextArea.append("\n\n");
             SellItemsTextArea.append("PRICE: ");
             SellItemsTextArea.append(Double.toString(GameDefault.auxItemVector.get(i).getPrice()));
+            SellItemsTextArea.append("\n\n");
         }
         
         // ========================= TAKE NAME ========================= //
@@ -138,6 +141,7 @@ public class JFrame_Menus extends javax.swing.JFrame {
         // ========================= TAKE COLOR ========================= //
         TakeColor.setEditable(true);
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,6 +180,7 @@ public class JFrame_Menus extends javax.swing.JFrame {
         AddCharacterButton2 = new javax.swing.JButton();
         TakeName = new javax.swing.JTextField();
         TakeColor = new javax.swing.JTextField();
+        jButton21 = new javax.swing.JButton();
         Loja = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -361,6 +366,13 @@ public class JFrame_Menus extends javax.swing.JFrame {
             }
         });
 
+        jButton21.setText("Select char...");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TeamLayout = new javax.swing.GroupLayout(Team);
         Team.setLayout(TeamLayout);
         TeamLayout.setHorizontalGroup(
@@ -371,21 +383,24 @@ public class JFrame_Menus extends javax.swing.JFrame {
                         .addGap(279, 279, 279)
                         .addComponent(jLabel1))
                     .addGroup(TeamLayout.createSequentialGroup()
+                        .addGap(228, 228, 228)
+                        .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TakeName, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ChangeNameButton))
+                        .addGap(39, 39, 39)
+                        .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ChangeColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TakeColor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(TeamLayout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(AddCharacterButton)
                         .addGap(44, 44, 44)
-                        .addComponent(AddCharacterButton1)
-                        .addGap(40, 40, 40)
-                        .addComponent(AddCharacterButton2))
-                    .addGroup(TeamLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TakeName)
-                            .addComponent(ChangeNameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(42, 42, 42)
-                        .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ChangeColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TakeColor))))
+                        .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton21)
+                            .addGroup(TeamLayout.createSequentialGroup()
+                                .addComponent(AddCharacterButton1)
+                                .addGap(40, 40, 40)
+                                .addComponent(AddCharacterButton2)))))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
         TeamLayout.setVerticalGroup(
@@ -393,20 +408,24 @@ public class JFrame_Menus extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TeamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jButton21)
+                .addGap(42, 42, 42)
                 .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddCharacterButton)
                     .addComponent(AddCharacterButton1)
                     .addComponent(AddCharacterButton2))
-                .addGap(38, 38, 38)
-                .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChangeNameButton)
-                    .addComponent(ChangeColorButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TakeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TakeColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(170, 170, 170))
+                .addGap(39, 39, 39)
+                .addGroup(TeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TeamLayout.createSequentialGroup()
+                        .addComponent(TakeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChangeNameButton))
+                    .addGroup(TeamLayout.createSequentialGroup()
+                        .addComponent(TakeColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChangeColorButton)))
+                .addGap(166, 166, 166))
         );
 
         Options.addTab("Team", Team);
@@ -925,6 +944,12 @@ public class JFrame_Menus extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_ChangeColorButtonActionPerformed
 
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        JFrame_Select selection = new JFrame_Select();
+        
+        selection.setVisible(true);
+    }//GEN-LAST:event_jButton21ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -994,6 +1019,7 @@ public class JFrame_Menus extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

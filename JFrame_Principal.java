@@ -119,7 +119,7 @@ public class JFrame_Principal extends javax.swing.JFrame {
             }
         });
 
-        PrincipalButton1.setText("Select Char");
+        PrincipalButton1.setText("Avaliar trabalho...");
         PrincipalButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrincipalButton1ActionPerformed(evt);
@@ -133,9 +133,9 @@ public class JFrame_Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuGameAreaLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(PrincipalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(PrincipalButton1)
-                .addGap(28, 28, 28))
+                .addGap(37, 37, 37))
         );
         MenuGameAreaLayout.setVerticalGroup(
             MenuGameAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,8 +209,7 @@ public class JFrame_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_PrincipalButtonActionPerformed
 
     private void PrincipalButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrincipalButton1ActionPerformed
-        selection = new JFrame_Select();
-        selection.setVisible(true);
+        
     }//GEN-LAST:event_PrincipalButton1ActionPerformed
 
     /**

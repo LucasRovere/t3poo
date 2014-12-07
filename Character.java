@@ -55,6 +55,37 @@ public abstract class Character implements Creature {
     public int getID() {
         return ID;
     }
+    
+    public int getMaxStats(){
+        return maxPoints;
+    }
+    
+    public int getStrenght(){
+        return strenght;
+    }
+    
+    public int getSpeed(){
+        return speed;
+    }
+    
+    public int getConstitution(){
+        return constitution;
+    }
+    
+    public int getDexterity(){
+        return dexterity;
+    }
+    
+    //Retorna uma string com os nomes dos ítens equipados. A ideia
+    //principal seria para interagir mais facilmente com um usuário
+    public String getEquiped(){
+        String equiped = "";
+        if(myItems.getEquipedWeapon1() != null) equiped += myItems.getEquipedWeapon1().getName() + " ";
+        if(myItems.getEquipedWeapon2() != null) equiped += myItems.getEquipedWeapon2().getName() + " ";
+        if(myItems.getEquipedArmor() != null) equiped += myItems.getEquipedArmor().getName();
+        
+        return equiped;
+    }
 
     public void addSpeed(int qtd) {
         speed += qtd;
@@ -114,6 +145,9 @@ public abstract class Character implements Creature {
         return myItems.searchItem(pos);
     }
 
+    //Calcula uma parcela dos pontos de ataque de um personagem.
+    //Algumas classes que herdam de Character podem modificar de alguma
+    //forma essa conta. No entanto, em geral, esse método é a base.
     @Override
     public int getAttackpoints() {
         int i, points = 0;
@@ -144,6 +178,7 @@ public abstract class Character implements Creature {
         return points;
     }
 
+    //A mesma ideia dos pontos de ataque
     @Override
     public int getDefensepoints() {
         int i, points = 0;
@@ -170,6 +205,9 @@ public abstract class Character implements Creature {
         return points;
     }
 
+    //Para gerar inimigos mais ao nível do personagem,
+    //retorna-se os battlepoints. Que dão uma base para gerar
+    //enemies e monsters. (Ataque + Defesa (sem ítens e pets))
     public int getBattlePoints() {
         int points;
         points = 0;
@@ -182,6 +220,8 @@ public abstract class Character implements Creature {
         return points * XP / 60;
     }
 
+    //Awn :3
+    //Além disso eles podem ajudar o personagem num ataque
     public Pet getPet() {
         return pet;
     }
@@ -218,6 +258,9 @@ public abstract class Character implements Creature {
         MP += qtd;
     }
 
+    //Esse método facilita o acesso correto ao inventário.
+    //Só é possível adicionar um ítem comprando-o.
+    //Melhora, também, o encapsulamento do inventário.
     public void buyItem(Item it) {
         double price;
 
@@ -264,6 +307,9 @@ public abstract class Character implements Creature {
         myItems.equipWeapons(name, "");
     }
 
+    //A soma de alguns atributos não pode exceder max points. No entanto
+    //esse método permite que eles sejam modificados, e acerta o valor
+    //de todos para manter a proporção desejada.
     private void normalizeAspects() {
         double fator = 0;
         double Dstrenght = strenght, Dspeed = speed, Ddexterity = dexterity, Dconstitution = constitution;
@@ -290,6 +336,7 @@ public abstract class Character implements Creature {
         constitution = (int) (Dconstitution + 0.5);
     }
 
+    //Um personagem só pode fazer uma coisa de cada vez.
     void assignTask() {
         taskFree = false;
     }

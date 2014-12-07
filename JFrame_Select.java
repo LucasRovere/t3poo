@@ -129,26 +129,31 @@ public class JFrame_Select extends javax.swing.JFrame {
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
         N = 0;
         GameDefault.selectChar(N);
+        this.setVisible(false);
     }//GEN-LAST:event_C1ActionPerformed
 
     private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
         N = 1;
         GameDefault.selectChar(N);
+        this.setVisible(false);
     }//GEN-LAST:event_C3ActionPerformed
 
     private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
         N = 2;
         GameDefault.selectChar(N);
+        this.setVisible(false);
     }//GEN-LAST:event_C2ActionPerformed
 
     private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
         N = 3;
         GameDefault.selectChar(N);
+        this.setVisible(false);
     }//GEN-LAST:event_C4ActionPerformed
 
     private void C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C5ActionPerformed
         N = 4;
         GameDefault.selectChar(N);
+        this.setVisible(false);
     }//GEN-LAST:event_C5ActionPerformed
 
     /**

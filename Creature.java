@@ -25,6 +25,7 @@ public interface Creature {
 
     void addHP(int qtd);
 
+    //Uma forma mais fácil de saber de qual criatura se trata
     void setID(int ID);
 
     void attackCharacter(Character opponent);

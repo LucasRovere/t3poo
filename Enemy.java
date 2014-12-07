@@ -22,8 +22,8 @@ public class Enemy implements Creature {
 
         this.name = name;
 
-        attackPoints = (int) ((Math.random() + 1) * battlePoints / 2);
-        defensePoints = (int) ((Math.random() + 1) * battlePoints / 2);
+        attackPoints = (int) ((Math.random()/2 + 1) * battlePoints / 2);
+        defensePoints = (int) ((Math.random()/2 + 1) * battlePoints / 2);
 
         this.attackPoints = attackPoints;
         this.defensePoints = defensePoints;

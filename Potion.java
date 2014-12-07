@@ -26,6 +26,7 @@ public abstract class Potion implements Item {
         return restorepts;
     }
 
+    //Ao usar uma poção, é necessário remove-la do inventário do personagem
     public abstract void use(Character c);
 
     @Override
@@ -43,6 +44,7 @@ public abstract class Potion implements Item {
         return 3 * restorepts / 2;
     }
 
+    //Poções estragam rápido, ninguém confia para comprar uma sem o lacre :/
     @Override
     public double getSellPrice() {
         return 0;

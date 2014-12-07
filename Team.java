@@ -43,6 +43,10 @@ class Team <T extends Creature> {
     public String getName() {
         return name;
     }
+    
+    public void setName(String name){
+        this.name = name;
+    }
 
     @Override
     public String toString() {
@@ -114,6 +118,10 @@ class Team <T extends Creature> {
         return points;
     }
 
+    //Essa função é necessária porque com o uso de várias threads na função
+    //principal, personagens podem morrer a qualquer momento. Por isso
+    //antes de realizar qualquer operação com o time, é importante verificar
+    //se nada mudou.
     public int clearDead(){
         int i, dead;
         
@@ -131,11 +139,13 @@ class Team <T extends Creature> {
     }
     
     public T getMember(int pos){
+        clearDead();
         if(pos>members.size()) return null;
         return members.get(pos);
     }
     
     public int teamSize(){
+        clearDead();
         return size;
     }
 }

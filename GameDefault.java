@@ -5,16 +5,30 @@
 package game;
 
 import static game.Color.*;
+import static game.ItemType.*;
 import java.util.ArrayList;
 
 public class GameDefault {
 
+    // O jogador tem um time. No entanto pode manipular um personagem desse time
+    //por vez.
     public static Character currentChar;
+    
+    //A loja do jogo é gerada automaticamete para que nunca faltem ítens
     public static ArrayList<Item> Store;
+    
+    //Nesse modo de jogo, um time tem até 4 personagens.
+    //Isso significa 4 threads rodando ao mesmo tempo.
     public static charTask[] runningTasks = {null, null, null, null};
+    
+    //O time principal do jogo
     public static Team<Character> playerTeam;
 
+    //A classe GameDefault retorna por meio da string message
+    //o que se passa na execução do jogo
     private static String message;
+    
+    //Em várias situações é necessário um vetor de ítens
     public static ArrayList<Item> auxItemVector;
     
     //Listas de nomes para o jogo
@@ -97,7 +111,6 @@ public class GameDefault {
 
     //add knight
     public static void addKnight() {
-        playerTeam.clearDead();
         if (playerTeam.teamSize() >= 4) {
             updateMessage("Time cheio");
             return;
@@ -177,6 +190,49 @@ public class GameDefault {
 
         for (i = 0; i < currentChar.getItemsNumber(); i++) {
             auxItemVector.add(currentChar.getItem(i));
+        }
+    }
+    
+    //Gera array com defesas disponíveis no inventário do personagem selecionado
+    //para que o jogador possa escolher equipar um deles
+    public static void genArmorList() {
+        int i;
+
+        auxItemVector.clear();
+        
+        if(currentChar == null) return;
+
+        for (i = 0; i < currentChar.getItemsNumber(); i++) {
+            if(currentChar.getItem(i).getType() == armor)
+                auxItemVector.add(currentChar.getItem(i));
+        }
+    }
+    
+    //Mesma ideia do anterior
+    public static void genWeaponList() {
+        int i;
+
+        auxItemVector.clear();
+        
+        if(currentChar == null) return;
+
+        for (i = 0; i < currentChar.getItemsNumber(); i++) {
+            if(currentChar.getItem(i).getType() == weapon)
+                auxItemVector.add(currentChar.getItem(i));
+        }
+    }
+    
+    //Mesma ideia do anterior. Para poções
+    public static void genUseList() {
+        int i;
+
+        auxItemVector.clear();
+        
+        if(currentChar == null) return;
+
+        for (i = 0; i < currentChar.getItemsNumber(); i++) {
+            if((currentChar.getItem(i).getType() == potion))
+                auxItemVector.add(currentChar.getItem(i));
         }
     }
 
@@ -371,7 +427,13 @@ public class GameDefault {
 
     }
 
-//Listas para uso no jogo
+//================================================================\\
+    //Listas
+    
+    //Manipuladores.
+    //Essas funções retornam o primeiro elemento da fila, e
+    //rodam-na. Assim, tendo n elementos, as primeiras n chamadas das
+    //funções terão retorno diferente
     
     public static String getArmorName(){
         String name;
@@ -433,6 +495,8 @@ public class GameDefault {
         return name;
     }
     
+    //Função usada para repor os ítens da loja conforme são comprados.
+    //Também usada para gerar os drops aleatórios dos enemies.
     public static Item generateStoreItem(int type){
         if(type == 0) return new Armor(getArmorName(), Math.random(), (int) (Math.random()*20));
         else if(type == 1) return new Weapon(getWeaponName(), Math.random(), (int) (Math.random()*20));
@@ -442,6 +506,7 @@ public class GameDefault {
         return null;
     }
     
+    //Criatividade não é o forte
     private static void generateLists(){
         Store = new ArrayList<>();
         armorNames = new ArrayList<>();
@@ -453,20 +518,39 @@ public class GameDefault {
         
         armorNames.add("Escudo do capeta");
         armorNames.add("Capacete de ouro");
+        armorNames.add("Botas estilozas");
+        armorNames.add("Protetor solar");
+        armorNames.add("Caneleiras profissionais");
         
         weaponNames.add("Espada flamejante");
         weaponNames.add("Lança envenenada");
+        weaponNames.add("Flecha de aço");
+        weaponNames.add("Cajado mágico");
+        weaponNames.add("Machete");
+        weaponNames.add("Espingarda");
         
         potionNames.add("Caldo de morcego");
         potionNames.add("Fermentado de testículo de boi");
+        potionNames.add("Creme de cobra");
+        potionNames.add("Café");
+        potionNames.add("Leite com manga");
         
         personNames.add("João Alfredo");
         personNames.add("Seu Irineu");
+        personNames.add("Chico");
+        personNames.add("Adenilson");
+        personNames.add("Ana");
         
         monsterNames.add("Destruidor de ossos");
         monsterNames.add("Coisa ruim");
+        monsterNames.add("Frank");
+        monsterNames.add("Kpta");
+        monsterNames.add("Nosferatu");
         
         petNames.add("Rex");
         petNames.add("Lua");
+        petNames.add("Peppa");
+        petNames.add("Dogs");
+        petNames.add("Nick");
         }
 }

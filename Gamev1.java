@@ -15,7 +15,7 @@ import static game.TrainingType.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Gamev2 {
+public class Gamev1 {
     
 
     public static JFrame_Principal GameW = new JFrame_Principal();
